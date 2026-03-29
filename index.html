@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PassGen Мини</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="layout">
+    <section class="card">
+      <header class="card__header">
+        <p class="eyebrow">Генератор паролей</p>
+        <h1>Надежный пароль за секунду</h1>
+        <p class="subtitle">Выберите параметры и получите случайный пароль.</p>
+      </header>
+
+      <form id="generator-form" class="form" novalidate>
+        <fieldset class="fieldset">
+          <legend>Символы</legend>
+          <label class="option">
+            <input type="checkbox" id="useDigits" checked>
+            <span>Цифры 0-9</span>
+          </label>
+          <label class="option">
+            <input type="checkbox" id="useLower" checked>
+            <span>Маленькие буквы a-z</span>
+          </label>
+          <label class="option">
+            <input type="checkbox" id="useUpper" checked>
+            <span>Большие буквы A-Z</span>
+          </label>
+          <label class="option">
+            <input type="checkbox" id="useSymbols">
+            <span>Спецсимволы %, *, ), ?, @, #, $, ~</span>
+          </label>
+          <label class="option">
+            <input type="checkbox" id="noRepeat">
+            <span>Избегать повторяющихся символов</span>
+          </label>
+        </fieldset>
+
+        <label class="length-row" for="length">
+          <span>Длина пароля</span>
+          <select id="length">
+            <option value="6">6</option>
+            <option value="8">8</option>
+            <option value="10">10</option>
+            <option value="12" selected>12</option>
+            <option value="14">14</option>
+            <option value="16">16</option>
+            <option value="24">24</option>
+            <option value="32">32</option>
+            <option value="40">40</option>
+            <option value="48">48</option>
+            <option value="56">56</option>
+            <option value="64">64</option>
+          </select>
+        </label>
+
+        <div class="actions">
+          <button type="submit" id="generateBtn">Сгенерировать</button>
+          <button type="button" id="copyBtn" class="secondary" disabled>Копировать</button>
+          <button type="button" id="leakCheckBtn" class="secondary" disabled>Проверить на утечку</button>
+        </div>
+      </form>
+
+      <section class="result" aria-live="polite">
+        <p class="result__label">Ваш пароль</p>
+        <output id="passwordOutput" class="password-output">-</output>
+        <div class="strength">
+          <div class="strength__head">
+            <span>Надежность</span>
+            <span id="strengthText">-</span>
+          </div>
+          <div class="strength__bar" role="progressbar" aria-label="Надежность пароля" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+            <span id="strengthFill"></span>
+          </div>
+        </div>
+        <p id="message" class="message"></p>
+        <p id="leakMessage" class="message leak-message"></p>
+        <p id="securityNote" class="security-note" hidden>
+          Генерация использует криптостойкий Web Crypto API. Проверка утечек через Have I Been Pwned работает по методу k-anonymity:
+          в сеть отправляются только первые 5 символов SHA-1 хеша, сам пароль на сервер не передается.
+        </p>
+      </section>
+    </section>
+
+    <section class="card history-card">
+      <h2>Последние пароли</h2>
+      <ul id="historyList" class="history-list">
+        <li class="history-empty">Пока пусто</li>
+      </ul>
+    </section>
+  </main>
+
+  <script src="./script.js"></script>
+</body>
+</html>
