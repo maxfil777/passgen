@@ -1,6 +1,6 @@
 # PassGen Clone (V2)
 
-Минималистичный генератор паролей на `HTML + JavaScript` по мотивам [passgen.ru](https://passgen.ru/) с упором на безопасность:
+Минималистичный генератор паролей на `HTML + JavaScript` с упором на безопасность:
 - криптостойкая генерация через `Web Crypto API` (`crypto.getRandomValues`);
 - проверка пароля на утечки через [Have I Been Pwned](https://haveibeenpwned.com/) по методу **k-anonymity** (без передачи самого пароля).
 
@@ -35,7 +35,6 @@ passgen-clone/
   index.html
   styles.css
   script.js
-  script.test.js
   README.md
 ```
 
